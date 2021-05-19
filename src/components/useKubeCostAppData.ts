@@ -1,13 +1,34 @@
+/*
+ * Copyright 2020 RoadieHQ
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *
+ * limitations under the License.
+ */
+
 import { Entity } from '@backstage/catalog-model';
 
-export const KUBECOST_ANNOTATION_URL = 'kubecost.com/url'
+export const KUBECOST_ANNOTATION_HOST = 'kubecost.com/host';
+export const KUBECOST_ANNOTATION_DEPLOYMENT_NAME = 'kubecost.com/deployment_name';
+// export const KUBECOST_ANNOTATION_NAME = 'kubecost.com/name';
 
-export const useKubeCostAppData =  ({ entity }: { entity: Entity }) => {
- const url = 
- entity?.metadata.annotations?.[KUBECOST_ANNOTATION_URL] ?? '';
+export const useKubecostAppData = ({ entity }: { entity: Entity }) => {
+  const host = entity?.metadata.annotations?.[KUBECOST_ANNOTATION_HOST] ?? '';
+  const deployment =
+    entity?.metadata.annotations?.[KUBECOST_ANNOTATION_DEPLOYMENT_NAME] ?? '';
+  // const name = entity?.metadata.annotations?.[KUBECOST_ANNOTATION_NAME] ?? '';
 
- if (!url) {
-    throw new Error("'kubecost' annotation is missing");
- }
-return { url }
+  if (!host || !deployment ) {
+    throw new Error("'kubecost' annotations are missing");
+  }
+  return { host, deployment };
 };

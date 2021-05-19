@@ -1,1 +1,1 @@
-export type KubeCostResponse = {};
+export type KubecostResponse = {};

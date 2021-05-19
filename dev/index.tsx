@@ -1,4 +1,4 @@
 import { createDevApp } from '@backstage/dev-utils';
-import { KubeCostPlugin } from '../src/plugin';
+import { kubecostPlugin } from '../src/plugin';
 
-createDevApp().registerPlugin(KubeCostPlugin).render();
+createDevApp().registerPlugin(kubecostPlugin).render();

@@ -1,10 +1,10 @@
 import { createApiRef, DiscoveryApi } from '@backstage/core';
 
-export interface KubeCostApi {}
+export interface KubecostApi {}
 
-export const kubecostApiRef = createApiRef<KubeCostApi>({
+export const kubecostApiRef = createApiRef<KubecostApi>({
   id: 'plugin.kubecost.service',
-  description: 'Used by the KubeCost plugin to make requests',
+  description: 'Used by the Kubecost plugin to make requests',
 });
 
 export type Options = {
@@ -12,7 +12,7 @@ export type Options = {
   proxyPath?: string;
 };
 
-export class KubeCostApiClient implements KubeCostApi {
+export class KubecostApiClient implements KubecostApi {
   // @ts-ignore
   private readonly discoveryApi: DiscoveryApi;
 

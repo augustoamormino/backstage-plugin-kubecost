@@ -1,0 +1,25 @@
+{
+  "code": 200,
+  "status": "success",
+  "data": {
+    "kubecost/kubecost-cost-analyzer": {
+      "aggregation": "deployment",
+      "environment": "kubecost/kubecost-cost-analyzer",
+      "cpuAllocationAverage": 0.3077404839330338,
+      "cpuCost": 0.4204095583677051,
+      "cpuEfficiency": 0.4226742715528462,
+      "efficiency": 0.43739838765538475,
+      "gpuAllocationAverage": 0,
+      "gpuCost": 0,
+      "ramAllocationAverage": 0.15996615274084938,
+      "ramCost": 0.029404639703588482,
+      "ramEfficiency": 0.6479147963045822,
+      "pvAllocationAverage": 31.825,
+      "pvCost": 0.366624,
+      "networkCost": 3.0240858258906944e-7,
+      "sharedCost": 0,
+      "totalCost": 0.8164385004798762
+    }
+  },
+  "message": "ComputeAggregateCostModel: L1 cache miss: 7d:::::app=cost-analyzer:::deployment:::::false:false:true L2 cache miss: 7d::24.000000h:false"
+}

@@ -1,31 +1,34 @@
 import { Entity } from '@backstage/catalog-model';
 import {
   createApiFactory,
-//   createComponentExtension,
+  createComponentExtension,
+  // createComponentExtension,
   createPlugin,
   createRoutableExtension,
   createRouteRef,
   discoveryApiRef,
 } from '@backstage/core';
-import { KubeCostApiClient, kubecostApiRef } from './api';
+import { KubecostApiClient, kubecostApiRef } from './api';
 import {
-  KUBECOST_ANNOTATION_URL,
-} from './components/useKubeCostAppData';
+  KUBECOST_ANNOTATION_HOST,
+} from './components/useKubecostAppData';
 
-export const isKubeCostAvailable = (entity: Entity) =>
-  Boolean(entity?.metadata.annotations?.[KUBECOST_ANNOTATION_URL]);
+export const isKubecostDashboardAvailable = (entity: Entity) =>
+  Boolean(entity?.metadata.annotations?.[KUBECOST_ANNOTATION_HOST]);
+export const isKubecostAvailable = (entity: Entity) =>
+  isKubecostDashboardAvailable(entity);
 
 export const entityContentRouteRef = createRouteRef({
   title: 'Kubecost Entity Content',
 });
 
-export const KubeCostPlugin = createPlugin({
+export const kubecostPlugin = createPlugin({
   id: 'kubecost',
   apis: [
     createApiFactory({
       api: kubecostApiRef,
       deps: { discoveryApi: discoveryApiRef },
-      factory: ({ discoveryApi }) => new KubeCostApiClient({ discoveryApi }),
+      factory: ({ discoveryApi }) => new KubecostApiClient({ discoveryApi }),
     }),
   ],
   routes: {
@@ -33,9 +36,17 @@ export const KubeCostPlugin = createPlugin({
   },
 });
 
-export const EntityKubeCostContent = KubeCostPlugin.provide(
+export const EntityKubecostContent = kubecostPlugin.provide(
   createRoutableExtension({
     component: () => import('./Router').then(m => m.Router),
     mountPoint: entityContentRouteRef,
   }),
 );
+
+export const EntityKubecostSpeedoCard = kubecostPlugin.provide(
+  createComponentExtension({
+    component: {
+      lazy: () => import('./components/kubecostWidget').then(m => m.KubecostSpeedo)
+    }
+  })
+)
