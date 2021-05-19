@@ -1,1 +1,3 @@
 # backstage-plugin-kubecost
+
+## Installation
